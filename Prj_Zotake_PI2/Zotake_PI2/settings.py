@@ -115,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'pt-br' #idioma português/BR
+LANGUAGE_CODE = 'pt-BR' #idioma português/BR
 
 TIME_ZONE = 'America/Sao_Paulo' #zona de São Paulo
 
@@ -136,7 +136,7 @@ STATICFILES_DIRS = (
 )
 
 # Arquivos enviados pelos usuários
-MEDIA_URL = '/upload/'
+MEDIA_URL = 'upload/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'upload') #pasta upload na raiz para organização
 

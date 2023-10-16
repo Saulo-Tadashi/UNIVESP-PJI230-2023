@@ -1,0 +1,83 @@
+﻿{% extends 'base.html' %}
+{% block conteudo %}
+
+<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="#page-top">Zotake</a>
+        <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded active" href="/">Inicio</a></li>                
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/">Sobre</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="masthead bg-primary text-white text-center">
+    <div class="container d-flex align-items-center flex-column">
+        <h1 class="masthead-heading text-uppercase mb-0">Status do pedido de orçamento</h1>
+
+        <!-- Icone de divisao -->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+
+        <p class="masthead-subheading font-weight-light mb-0">
+            Agradecemos seu contato. Agora é só esperar que logo entraremos em contato para 
+            dar andamento ao seu pedido de orçamento.
+        </p>
+    </div>
+</header>
+
+<section class="page-section" id="pedido_enviado">
+    <div class="container align-items-center">
+        <h1>Seu pedido foi registrado</h1>
+
+        <div class="form-floating mb-3">
+            <input class="form-control" id="id" type="number" value="{{pedido.id_pedidos}}" disabled />
+            <label for="id">Esse é o número do seu pedido</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input class="form-control" id="nome" type="text" value="{{pedido.nome}}" disabled />
+            <label for="nome">Nome completo</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input class="form-control" id="email" type="email" value="{{pedido.email}}" disabled />
+            <label for="email">Endereco de Email</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input class="form-control" id="telefone" type="tel" value="{{pedido.telefone}}" disabled />
+            <label for="telefone">Numero de telefone</label>
+        </div>
+
+        <div class="container form-floating mb-3">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    {% if pedido.arquivo %}
+                    <img class="img-fluid" src="{{pedido.arquivo.url}}" />
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-floating mb-3">
+            <textarea class="form-control" id="mensagem" type="text" style="height: 10rem" disabled>{{pedido.mensagem}}</textarea>
+            <label for="mensagem">Mensagem</label>
+        </div>
+
+        <div class="d-flex gap-2 justify-content-center py-5">
+            <button class="btn btn-danger rounded-pill px-3" type="button" onclick="location.href = '/';">Voltar</button>
+        </div>
+
+</section>
+
+{% endblock %}

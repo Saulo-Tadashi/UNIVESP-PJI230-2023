@@ -16,7 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+from main import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
+    # path('produtos/', views.home, name='produtos'),
+    path('pedido-enviado/', views.enviar_pedidos, name='pedido'),
+    # path('sobre/', views.home, name='sobre'),
+    # path('contato/', views.home, name='contato'),
 ]
+
+# incluir /media como caminho estático em modo DEBUG. Para produção deve ser configurado o servidor
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
