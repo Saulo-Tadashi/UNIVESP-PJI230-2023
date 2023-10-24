@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main.apps.MainConfig'
+    'main.apps.MainConfig',
+    'authentication.apps.AuthenticationConfig',
+    'order.apps.OrderConfig'
 ]
 
 MIDDLEWARE = [
@@ -81,6 +83,7 @@ WSGI_APPLICATION = 'Zotake_PI2.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# POSTGRESQL
 DATABASES = {
     'default': {
         'ENGINE' : 'django.db.backends.postgresql',
@@ -92,6 +95,13 @@ DATABASES = {
     }
 }
 
+#SQLITE - teste na memória RAM
+'''DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}'''
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
