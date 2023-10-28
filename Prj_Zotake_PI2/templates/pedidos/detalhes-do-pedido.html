@@ -1,0 +1,52 @@
+﻿{% extends 'base_funcionario.html' %}
+{% block conteudo %}
+
+<section class="page-section" id="pedido_enviado">
+    <div class="container align-items-center">
+        <h1>Detalhes do pedido</h1>
+        {% if pedido %}
+        <div class="form-floating mb-3">
+            <input class="form-control" id="id" type="number" value="{{pedido.id_pedidos}}" disabled />
+            <label for="id">Esse é o número do seu pedido</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input class="form-control" id="nome" type="text" value="{{pedido.nome}}" disabled />
+            <label for="nome">Nome completo</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input class="form-control" id="email" type="email" value="{{pedido.email}}" disabled />
+            <label for="email">Endereco de Email</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input class="form-control" id="telefone" type="tel" value="{{pedido.telefone}}" disabled />
+            <label for="telefone">Numero de telefone</label>
+        </div>
+
+        <div class="container form-floating mb-3">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    {% if pedido.arquivo %}
+                    <img class="img-fluid" src="{{pedido.arquivo.url}}" />
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-floating mb-3">
+            <textarea class="form-control" id="mensagem" type="text" style="height: 10rem" disabled>{{pedido.mensagem}}</textarea>
+            <label for="mensagem">Mensagem</label>
+        </div>
+        {% else %}
+        <p>Erro no carregamento de pedido</p>
+        {% endif %}
+
+        <div class="d-flex gap-2 justify-content-center py-5">
+            <button class="btn btn-danger rounded-pill px-3" type="button" onclick="history.back()">Voltar</button>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

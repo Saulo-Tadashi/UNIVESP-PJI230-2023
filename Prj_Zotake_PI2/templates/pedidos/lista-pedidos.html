@@ -1,0 +1,21 @@
+﻿{% extends 'base_funcionario.html' %}
+{% block conteudo %}
+
+<section class="page-section" id="pedido_enviado">
+    <div class="container align-items-center">
+        <h1>Lista de pedidos de orcamentos</h1>
+        {% if lista_pedidos %}
+        <ul>
+            {% for pedido in lista_pedidos %}
+            <li>
+                <a href="{% url 'detalhes-pedido' pedido.pk %}">{{ pedido.id_pedidos }}</a> ({{pedido.nome}}) - ({{pedido.criacao}})
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>Não há nenhum pedido cadastrado.</p>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}

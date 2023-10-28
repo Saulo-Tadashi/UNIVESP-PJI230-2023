@@ -1,0 +1,43 @@
+﻿{% extends 'base.html' %}
+{% block conteudo %}
+
+<section class="page-section" id="login">
+    <div class="container align-items-center">
+
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Faça seu login</h2>
+
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+
+        <!-- Formulario de login -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-7">
+                <form action="{% url 'login' %}" method="POST">
+                    {% csrf_token %}
+
+                    <!-- Usuário -->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" name="usuario" type="text" placeholder="Insira seu usuario..." data-sb-validations="required" />
+                        <label for="nome">Nome de usuário</label>
+                        <div class="invalid-feedback" data-sb-feedback="name:required">O usuário e obrigatorio</div>
+                    </div>
+                    <!-- Senha -->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" name="senha" type="password" placeholder="Insira sua senha..." data-sb-validations="required" />
+                        <label for="nome">Senha</label>
+                        <div class="invalid-feedback" data-sb-feedback="name:required">A senha e obrigatorio</div>
+                    </div>
+
+                    <!-- Botao de envio-->
+                    <button class="btn btn-primary btn-xl" id="submitButton" type="submit">Logar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+    
+{% endblock %}
