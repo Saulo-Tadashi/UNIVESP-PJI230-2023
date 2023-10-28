@@ -10,7 +10,8 @@ urlpatterns = [
     path('home/', include('main.urls')),
     path('', RedirectView.as_view(url='/home/')),
     path('order/', include('order.urls')),
-    path('auth/', include('authentication.urls')),
+    path('users/', include('authentication.urls')),
+    #path('accounts/', include('django.contrib.auth.urls')),
 ]
 
 # incluir /media como caminho estático em modo DEBUG. Para produção deve ser configurado o servidor

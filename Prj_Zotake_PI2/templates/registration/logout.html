@@ -1,0 +1,13 @@
+﻿{% extends 'base_funcionario.html' %}
+{% block conteudo %}
+
+<section class="page-section" id="logout">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-7">
+            <p>Você fez logout!</p>
+            <a href="{% url 'login'%}">Clique aqui para entrar novamente.</a>
+        </div>
+    </div>
+</section>
+    
+{% endblock %}
