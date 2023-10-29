@@ -58,7 +58,7 @@ ROOT_URLCONF = 'Zotake_PI2.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'], #inclusão do caminho dos templates
+        'DIRS': ['templates'], #inclusï¿½o do caminho dos templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -73,7 +73,7 @@ TEMPLATES = [
 
 TEMPLATE_DIRS = (
 
-    os.path.join(BASE_DIR, 'templates'), #pasta templates na raiz para organização
+    os.path.join(BASE_DIR, 'templates'), #pasta templates na raiz para organizaï¿½ï¿½o
 
 )
 
@@ -95,7 +95,7 @@ DATABASES = {
     }
 }
 
-#SQLITE - teste na memória RAM
+#SQLITE - teste na memï¿½ria RAM
 '''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -125,9 +125,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'pt-BR' #idioma português/BR
+LANGUAGE_CODE = 'pt-BR' #idioma portuguï¿½s/BR
 
-TIME_ZONE = 'America/Sao_Paulo' #zona de São Paulo
+TIME_ZONE = 'America/Sao_Paulo' #zona de Sï¿½o Paulo
 
 USE_I18N = True
 
@@ -141,16 +141,16 @@ STATIC_URL = 'static/'
 
 STATICFILES_DIRS = (
 
-    os.path.join(BASE_DIR, 'static'), #pasta static na raiz para organização
+    os.path.join(BASE_DIR, 'static'), #pasta static na raiz para organizaï¿½ï¿½o
 
 )
 
-# Arquivos enviados pelos usuários
+# Arquivos enviados pelos usuï¿½rios
 MEDIA_URL = 'upload/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'upload') #pasta upload na raiz para organização
+MEDIA_ROOT = os.path.join(BASE_DIR, 'upload') #pasta upload na raiz para organizaï¿½ï¿½o
 
-# Redireciona para a URL da página principal após login
+# Redireciona para a URL da pï¿½gina principal apï¿½s login
 LOGIN_REDIRECT_URL = '/order/lista/'
 LOGOUT_REDIRECT_URL = '/home/'
 
