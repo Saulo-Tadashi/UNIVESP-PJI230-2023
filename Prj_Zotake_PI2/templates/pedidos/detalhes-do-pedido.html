@@ -40,13 +40,20 @@
             <label for="mensagem">Mensagem</label>
         </div>
 
-        <form action="" method="post">
-            {% csrf_token %}
-            <table>
-                {{form.as_table}}
-            </table>
-            <input type="submit" value="Submit">
-        </form>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-7">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <table>
+                        {{form.as_table}}
+                    </table>
+
+                    <div class="d-flex gap-2 justify-content-center py-5">
+                        <input class="btn btn-success rounded-pill px-3" type="submit" value="Atualizar">
+                    </div>
+                </form>
+            </div>
+        </div>
 
         {% else %}
         <p>Erro no carregamento de pedido</p>

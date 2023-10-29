@@ -1,20 +1,73 @@
 ﻿{% extends 'base_funcionario.html' %}
+
+{% block titulo %}Lista de pedidos de orcamentos{% endblock %}
+{% block mensagem %} Navegue pelos pedidos recebidos. Utilize os botao a baixo para realizar busca com filtro.{% endblock %}
+
 {% block conteudo %}
 
 <section class="page-section" id="pedido_enviado">
-    <div class="container align-items-center">
-        <h1>Lista de pedidos de orcamentos</h1>
+    <div class="container align-items-center">        
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Filtrar lista
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'pedidos-filtro' 'prazo' %}">Prazo</a></li>
+                <li><a class="dropdown-item" href="{% url 'pedidos-filtro' 'pagamento' %}">Pagamento</a></li>
+                <li><a class="dropdown-item" href="{% url 'pedidos-filtro' 'despacho' %}">Despacho</a></li>
+                <li><a class="dropdown-item" href="{% url 'pedidos-filtro' 'conclusao' %}">Conclusao</a></li>
+                <div class="dropdown-divider"></div>
+                <li><a class="dropdown-item" href="{% url 'pedidos' %}">Limpar</a></li>
+            </ul>
+        </div>
         {% if lista_pedidos %}
-        <ul>
-            {% for pedido in lista_pedidos %}
-            <li>
-                [ID: {{ pedido.id_pedidos }}] <a href="{% url 'detalhes-pedido' pedido.pk %}">{{pedido.nome}}</a> ({{pedido.criacao}})
-            </li>
-            {% endfor %}
-        </ul>
+        <table class="table table-sm table-hover">
+            <thead class="thead-dark">
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Pedido</th>
+            <th scope="col">Orcamento</th>
+            <th scope="col">Prazo</th>
+            <th scope="col">Pagamento</th>
+            <th scope="col">Despacho</th>
+            <th scope="col">Conclusao</th>
+            </thead>
+            <tbody>
+                {% for pedido in lista_pedidos %}
+                <tr>
+                    <th scope="row">{{ pedido.id_pedidos }}</th>
+                    <td><a href="{% url 'detalhes-pedido' pedido.pk %}">{{pedido.nome}}</a></td>
+                    <td>{{pedido.criacao}}</td>
+                    <td>{{pedido.envio_orcamento}}</td>
+                    <td>{{pedido.prazo}}</td>
+                    <td>{{pedido.pagamento}}</td>
+                    <td>{{pedido.despacho}}</td>
+                    <td>{{pedido.conclusao}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
         {% else %}
         <p>Não há nenhum pedido cadastrado.</p>
         {% endif %}
+
+        {% block pagination %}
+        {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">anterior</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">proximo</a>
+                {% endif %}
+            </span>
+        </div>
+        {% endif %}
+        {% endblock %}
     </div>
 </section>
 

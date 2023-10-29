@@ -15,8 +15,16 @@
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#sobre">Sobre</a></li>
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#pedidos">Pedidos</a></li>
                 {% if user.is_authenticated %}
-                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'logout'%}?proximo={{request.path}}">
-                    Ola, {{ user.get_username }} (Sair)</a></li>
+                <li class="nav-item mx-0 mx-lg-1">
+                    <a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'logout'%}?proximo={{request.path}}">
+                        Ola, {{ user.get_username }} (Sair)
+                    </a>
+                </li>
+                <li class="nav-item mx-0 mx-lg-1">
+                    <a class="nav-link py-3 px-0 px-lg-3 rounded active" href="{% url 'pedidos'%}">
+                        Pedidos
+                    </a>
+                </li>
                 {% else %}
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded active" href="{% url 'login'%}?proximo={{request.path}}">Login</a></li>
                 {% endif %}
@@ -176,13 +184,13 @@
 
                     <!-- Nome -->
                     <div class="form-floating mb-3">
-                        <input class="form-control" name="nome" type="text" placeholder="Insira seu nome completo..." data-sb-validations="required" />
+                        <input class="form-control" name="nome" type="text" placeholder="Insira seu nome completo..." data-sb-validations="required" required/>
                         <label for="nome">Nome completo</label>
                         <div class="invalid-feedback" data-sb-feedback="name:required">O nome e obrigatorio</div>
                     </div>
                     <!-- E-mail -->
                     <div class="form-floating mb-3">
-                        <input class="form-control" name="email" type="email" placeholder="nome@exemplo.com" data-sb-validations="required,email" />
+                        <input class="form-control" name="email" type="email" placeholder="nome@exemplo.com" data-sb-validations="required,email" required/>
                         <label for="email">Endereco de Email</label>
                         <div class="invalid-feedback" data-sb-feedback="email:required">Um e-mail e obrigatorio.</div>
                         <div class="invalid-feedback" data-sb-feedback="email:email">Este e-mail nao e valido.</div>
@@ -258,7 +266,7 @@
                             <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
+                                Fechar janela
                             </button>
                         </div>
                     </div>
@@ -290,7 +298,7 @@
                             <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
+                                Fechar janela
                             </button>
                         </div>
                     </div>
@@ -322,7 +330,7 @@
                             <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
+                                Fechar janela
                             </button>
                         </div>
                     </div>
@@ -354,7 +362,7 @@
                             <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
+                                Fechar janela
                             </button>
                         </div>
                     </div>
@@ -386,7 +394,7 @@
                             <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
+                                Fechar janela
                             </button>
                         </div>
                     </div>
@@ -418,7 +426,7 @@
                             <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
+                                Fechar janela
                             </button>
                         </div>
                     </div>

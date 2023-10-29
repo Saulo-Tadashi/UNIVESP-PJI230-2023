@@ -32,8 +32,11 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded active" href="/">Inicio</a></li>
                     {% if user.is_authenticated %}
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'logout'%}?proximo={{request.path}}">
-                        Ola, {{ user.get_username }} (Sair)</a></li>
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'logout'%}?proximo={{request.path}}">
+                            Ola, {{ user.get_username }} (Sair)
+                        </a>
+                    </li>
                     {% else %}
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded active" href="{% url 'login'%}?proximo={{request.path}}">Login</a></li>
                     {% endif %}
@@ -41,43 +44,55 @@
             </div>
         </div>
     </nav>
+    
+    <header class="masthead bg-primary text-white text-center">
+        <div class="container d-flex align-items-center flex-column">
+            <h1 class="masthead-heading text-uppercase mb-0">{% block titulo %} {% endblock %}</h1>
+
+            <!-- Icone de divisao -->
+            <div class="divider-custom divider-light">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+
+            <p class="masthead-subheading font-weight-light mb-0">
+                {% block mensagem %} {% endblock %}
+            </p>
+        </div>
+    </header>
 
     {% block conteudo %}
 
     {% endblock %}
 
-    {% block pagination %}
-    {% if is_paginated %}
-    <div class="pagination">
-        <span class="page-links">
-            {% if page_obj.has_previous %}
-            <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">anterior</a>
-            {% endif %}
-            <span class="page-current">
-                Page {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
-            </span>
-            {% if page_obj.has_next %}
-            <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">proximo</a>
-            {% endif %}
-        </span>
-    </div>
-    {% endif %}
-    {% endblock %}
-
     <footer class="footer text-center">
         <div class="container">
             <div class="row">
-
+                <!-- Localizacao -->
                 <div class="col-lg-4 mb-5 mb-lg-0">
-
+                    <h4 class="text-uppercase mb-4">Localizacao</h4>
+                    <p class="lead mb-0">
+                        Interior de Sao Paulo, 1 hora de Campinas/SP
+                        <br />
+                        Araras, SP - CEP 13.600-000
+                    </p>
                 </div>
-
+                <!-- Icones de redes sociais -->
                 <div class="col-lg-4 mb-5 mb-lg-0">
-
+                    <h4 class="text-uppercase mb-4">Redes sociais</h4>
+                    <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
+                    <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
+                    <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
                 </div>
-
+                <!-- Texto sobre a empresa -->
                 <div class="col-lg-4">
-
+                    <h4 class="text-uppercase mb-4">Sobre Zotake Artesanato</h4>
+                    <p class="lead mb-0">
+                        Zotake e uma empresa familiar, prezando pela qualidade, pelo carinho e
+                        pela dedicacao a todos os trabalhos para melhor atender voce.
+                    </p>
                 </div>
             </div>
         </div>

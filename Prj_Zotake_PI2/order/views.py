@@ -17,29 +17,50 @@ from order.forms import PedidosAtualizar as Atualizar
 
 def enviar_pedidos (request):
     pedido = Pedidos()
-    pedido.nome = request.POST.get('nome')
-    pedido.email = request.POST.get('email')
-    pedido.telefone = request.POST.get('telefone')
-    pedido.mensagem = request.POST.get('mensagem')
-    pedido.arquivo = request.FILES.get('exemplo')
-    pedido.save()
+    try:
+        pedido.nome = request.POST.get('nome')
+        pedido.email = request.POST.get('email')
+        pedido.telefone = request.POST.get('telefone')
+        pedido.mensagem = request.POST.get('mensagem')
+        pedido.arquivo = request.FILES.get('exemplo')
 
-    obj = {
-        'pedido' : pedido,       
-    }
+        if pedido.nome is None or pedido.email is None:
+            raise ValidationError(_('O preenchimento do nome e e-mail e obrigatorio!'))
 
-    return render(request, 'pedidos/sucesso-pedido.html', obj)
+        pedido.save()
+
+        obj = {
+            'pedido' : pedido,       
+        }
+
+        return render(request, 'pedidos/sucesso-pedido.html', obj)
+    except Exception as e:
+        raise e
+    
 
 class PedidosListView(LoginRequiredMixin, generic.ListView):
     model = Pedidos
     context_object_name = 'lista_pedidos'
     template_name = 'pedidos/lista-pedidos.html'
-    paginate_by = 15
+    paginate_by = 8
     login_url = '/users/login/'
     redirect_field_name = '/order/lista/'
 
     def get_queryset(self):
-        return Pedidos.objects.all()
+        pedidos = Pedidos.objects.all()
+        if self.request.path == reverse('pedidos'):
+            pedidos = Pedidos.objects.all().order_by('criacao')
+        elif self.kwargs["mode"] == 'orcamento':
+            pedidos = Pedidos.objects.filter(envio_orcamento__isnull=False).order_by('envio_orcamento')
+        elif self.kwargs["mode"] == 'prazo':
+            pedidos = Pedidos.objects.filter(prazo__isnull=False).order_by('prazo')
+        elif self.kwargs["mode"] == 'pagamento':
+            pedidos = Pedidos.objects.filter(pagamento__isnull=False).order_by('pagamento')
+        elif self.kwargs["mode"] == 'despacho':
+            pedidos = Pedidos.objects.filter(despacho__isnull=False).order_by('despacho')
+        elif self.kwargs["mode"] == 'conclusao':
+            pedidos = Pedidos.objects.filter(conclusao__isnull=False).order_by('conclusao')
+        return pedidos
 
     def get_context_data(self, **kwargs):        
         context = super(PedidosListView, self).get_context_data(**kwargs)        

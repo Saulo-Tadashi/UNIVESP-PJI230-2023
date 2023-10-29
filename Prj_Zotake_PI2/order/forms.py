@@ -5,17 +5,6 @@ from django.utils.translation import gettext_lazy as _
 from order.models import Pedidos
 
 class PedidosAtualizar(forms.ModelForm):    
-    '''cpf_pagamento = forms.IntegerField(required=True, label = 'CPF do pagador')
-    cpf_envio = forms.IntegerField(required=False, label='CPF do destinatario do envio')
-    endereco = forms.CharField(required=False, label='Endereco de envio')
-    valor_produto = forms.DecimalField(required=True, label='Valor do produto')
-    valor_frete = forms.DecimalField(required=False, label='Valor do frete')
-    prazo = forms.DateField(required=False, label='Prazo de entrega')
-    anotacoes = forms.CharField(required=False, widget=forms.Textarea, label='Anotacoes relevantes')
-    envio_orcamento = forms.DateField(required=False, label='Data do envio do orcamento')
-    pagamento = forms.DateField(required=False, label='Data do pagamento')
-    despacho = forms.DateField(required=False, label='Data do despacho')
-    conclusao = forms.DateField(required=False, label='Data do encerramento da venda')'''
 
     class Meta:
         model = Pedidos
@@ -25,7 +14,7 @@ class PedidosAtualizar(forms.ModelForm):
         data = self.cleaned_data['cpf_pagamento']
 
         if data:
-            if data > 99999999999 or data < 0:
+            if data > 99999999999 or data < 100000000:
                 raise ValidationError(_('Valor invalido de CPF'))
 
         return data
@@ -34,7 +23,7 @@ class PedidosAtualizar(forms.ModelForm):
         data = self.cleaned_data['cpf_envio']
 
         if data:
-            if data > 99999999999 or data < 0:
+            if data > 99999999999 or data < 100000000:
                 raise ValidationError(_('Valor invalido de CPF'))
 
         return data
