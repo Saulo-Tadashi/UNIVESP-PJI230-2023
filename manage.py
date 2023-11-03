@@ -3,14 +3,18 @@
 import os
 import sys
 
-import dotenv
+from dotenv import load_dotenv
 
 def main():
 
-    dotenv.load_dotenv()
+    if 'WEBSITE_HOSTNAME' not in os.environ:
+        print("Loading environment variables for .env file")
+        load_dotenv('./.env')
 
-    """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Zotake_PI2.settings')
+    # When running on Azure App Service you should use the production settings.
+    settings_module = "Zotake_PI2.production" if 'WEBSITE_HOSTNAME' in os.environ else 'Zotake_PI2.settings'
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
+    
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
