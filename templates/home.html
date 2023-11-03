@@ -184,33 +184,33 @@
 
                     <!-- Nome -->
                     <div class="form-floating mb-3">
-                        <input class="form-control" name="nome" type="text" placeholder="Insira seu nome completo..." data-sb-validations="required" required/>
+                        <input class="form-control" id="nome" type="text" placeholder="Insira seu nome completo..." data-sb-validations="required" required/>
                         <label for="nome">Nome completo</label>
                         <div class="invalid-feedback" data-sb-feedback="name:required">O nome e obrigatorio</div>
                     </div>
                     <!-- E-mail -->
                     <div class="form-floating mb-3">
-                        <input class="form-control" name="email" type="email" placeholder="nome@exemplo.com" data-sb-validations="required,email" required/>
+                        <input class="form-control" id="email" type="email" placeholder="nome@exemplo.com" data-sb-validations="required,email" required/>
                         <label for="email">Endereco de Email</label>
                         <div class="invalid-feedback" data-sb-feedback="email:required">Um e-mail e obrigatorio.</div>
                         <div class="invalid-feedback" data-sb-feedback="email:email">Este e-mail nao e valido.</div>
                     </div>
                     <!-- Telefone -->
                     <div class="form-floating mb-3">
-                        <input class="form-control" name="telefone" type="tel" placeholder="(12) 3456-7890" data-sb-validations="required" />
+                        <input class="form-control" id="telefone" type="tel" placeholder="(12) 3456-7890" data-sb-validations="required" />
                         <label for="telefone">Numero de telefone</label>
                         <div class="invalid-feedback" data-sb-feedback="phone:required">Um numero de telefone e obrigatorio.</div>
                     </div>
 
                     <!-- Arquivo-->
                     <div class="form-floating mb-3">
-                        <input class="form-control form-control-sm" name="exemplo" id="formFileSm" type="file" accept="image/*">
+                        <input class="form-control form-control-sm" id="exemplo" id="formFileSm" type="file" accept="image/*">
                         <label for="exemplo">Arquivo de imagem</label>
                     </div>
 
                     <!-- Mensagem -->
                     <div class="form-floating mb-3">
-                        <textarea class="form-control" name="mensagem" type="text" placeholder="Insira sua mensagem aqui..." style="height: 10rem" data-sb-validations="required"></textarea>
+                        <textarea class="form-control" id="mensagem" type="text" placeholder="Insira sua mensagem aqui..." style="height: 10rem" data-sb-validations="required"></textarea>
                         <label for="mensagem">Message</label>
                         <div class="invalid-feedback" data-sb-feedback="message:required">
                             O campo de mensagem e obrigatoria. Por favor,

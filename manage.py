@@ -11,9 +11,16 @@ def main():
         print("Loading environment variables for .env file")
         load_dotenv('./.env')
 
-    # When running on Azure App Service you should use the production settings.
-    settings_module = "Zotake_PI2.production" if 'WEBSITE_HOSTNAME' in os.environ else 'Zotake_PI2.settings'
+    #settings_module = "Zotake_PI2.production" if 'WEBSITE_HOSTNAME' in os.environ else 'Zotake_PI2.settings'
+    
+    production = True
+
+    if production :
+        setting_module = "Zotake_PI2.production"
+    else:
+        setting_module = 'Zotake_PI2.settings'
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
+
     
     try:
         from django.core.management import execute_from_command_line
