@@ -7,9 +7,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET_KEY = 'django-insecure-iu@$(vy3uv_u4g=#r*#ur6^o%#o&lu3fzjh@%l%)#(w9v8x#jx'
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = True
+DEBUG = False if 'WEBSITE_HOSTNAME' in os.environ else True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else []
 
 if 'CODESPACE_NAME' in os.environ:
     CSRF_TRUSTED_ORIGINS = [f'https://{os.getenv("CODESPACE_NAME")}-8000.{os.getenv("GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN")}']
