@@ -1,15 +1,13 @@
 ﻿import os
 
 from .settings import *  # noqa
-from django.conf import settings
 from .settings import BASE_DIR
 
 # Configure the domain name using the environment variable
 # that Azure automatically creates for us.
-settings.DEBUG = False
+DEBUG = False
 
 SECRET_KEY = os.getenv('SECRET_KEY')
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
 CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS').split(' ')
