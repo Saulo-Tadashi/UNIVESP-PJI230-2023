@@ -1,5 +1,6 @@
-﻿import os
-from pathlib import Path
+﻿from pathlib import Path
+import os
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -113,10 +114,10 @@ AZURE_ACCOUNT_KEY = os.getenv('AZURE_ACCOUNT_KEY')
 AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
 
 STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/media/'
-MEDIA_ROOT = BASE_DIR / 'mediafiles'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 
 LOGIN_REDIRECT_URL = '/order/lista/'
 LOGOUT_REDIRECT_URL = '/home/'
