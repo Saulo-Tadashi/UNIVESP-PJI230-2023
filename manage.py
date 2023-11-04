@@ -13,12 +13,12 @@ def main():
 
     #settings_module = "Zotake_PI2.production" if 'WEBSITE_HOSTNAME' in os.environ else 'Zotake_PI2.settings'
     
-    settings_module = "Zotake_PI2.production"
+    # settings_module = 'Zotake_PI2.production'
 
-    if os.getenv('PRODUCTION') == 'False' :
-        settings_module = "Zotake_PI2.settings"
+    # if os.getenv('PRODUCTION') == 'False' :
+    #    settings_module = 'Zotake_PI2.settings'
 
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Zotake_PI2.production')
 
     
     try:
