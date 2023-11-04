@@ -61,12 +61,6 @@ TEMPLATES = [
     },
 ]
 
-TEMPLATE_DIRS = (
-
-    os.path.join(BASE_DIR, 'templates'), #pasta templates na raiz para organiza��o
-
-)
-
 WSGI_APPLICATION = 'Zotake_PI2.wsgi.application'
 
 # Configure Postgres database based on connection string of the libpq Keyword/Value form
