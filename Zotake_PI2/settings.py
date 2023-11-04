@@ -1,18 +1,36 @@
-from pathlib import Path
-import os
+﻿import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+from .settings import *  # noqa
+from django.conf import settings
+from .settings import BASE_DIR
+
+# Configure the domain name using the environment variable
+# that Azure automatically creates for us.
+settings.DEBUG = False
+
+SECRET_KEY = os.getenv('SECRET_KEY')
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECRET_KEY = 'django-insecure-iu@$(vy3uv_u4g=#r*#ur6^o%#o&lu3fzjh@%l%)#(w9v8x#jx'
-SECRET_KEY = os.getenv('SECRET_KEY')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS').split(' ')
 
-DEBUG = True
+SECURE_SSL_REDIRECT = \
+    os.getenv('SECURE_SSL_REDIRECT', '0').lower() in ['true', 't', '1']
+if SECURE_SSL_REDIRECT:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-ALLOWED_HOSTS = []
-
-if 'CODESPACE_NAME' in os.environ:
-    CSRF_TRUSTED_ORIGINS = [f'https://{os.getenv("CODESPACE_NAME")}-8000.{os.getenv("GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN")}']
+# WhiteNoise configuration
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    # Add whitenoise middleware after the security middleware
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -24,17 +42,6 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'authentication.apps.AuthenticationConfig',
     'order.apps.OrderConfig'
-]
-
-MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'Zotake_PI2.urls'
@@ -63,32 +70,19 @@ TEMPLATE_DIRS = (
 
 WSGI_APPLICATION = 'Zotake_PI2.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-# POSTGRESQL local
+# Configure Postgres database based on connection string of the libpq Keyword/Value form
+# https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING
+conn_str = os.getenv('AZURE_POSTGRESQL_CONNECTIONSTRING')
+conn_str_params = {pair.split('=')[0]: pair.split('=')[1] for pair in conn_str.split(' ')}
 DATABASES = {
     'default': {
-        'ENGINE' : 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DBNAME'),
-		'USER' : os.environ.get('DBUSER'),
-		'PASSWORD' : os.environ.get('DBPASS'),
-		'HOST' : os.environ.get('DBHOST'),
-        'PORT': os.environ.get('DBPORT'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': conn_str_params['dbname'],
+        'HOST': conn_str_params['host'],
+        'USER': conn_str_params['user'],
+        'PASSWORD': conn_str_params['password'],
     }
 }
-
-#SQLITE - teste na mem�ria RAM
-'''DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}'''
-
-# Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -105,96 +99,28 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LANGUAGE_CODE = 'pt-br'
 
-# Internationalization
-# https://docs.djangoproject.com/en/4.2/topics/i18n/
-
-LANGUAGE_CODE = 'pt-br' #idioma portugues/BR
-
-TIME_ZONE = 'America/Sao_Paulo' #zona de Sao Paulo
+TIME_ZONE = 'America/Sao_Paulo' 
 
 USE_I18N = True
 
 USE_TZ = True
 
+DEFAULT_FILE_STORAGE = 'core.azure_storage.AzureMediaStorage'
+STATICFILES_STORAGE = 'core.azure_storage.AzureStaticStorage'
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
+AZURE_ACCOUNT_NAME = os.getenv('AZURE_ACCOUNT_NAME')
+AZURE_ACCOUNT_KEY = os.getenv('AZURE_ACCOUNT_KEY')
+AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
 
-STATIC_URL = 'static/'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATICFILES_DIRS = (
+STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-    os.path.join(BASE_DIR, 'static'), #pasta static na raiz para organiza��o
+MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/media/'
+MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
-)
-
-# Arquivos enviados pelos usu�rios
-MEDIA_URL = 'upload/'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'upload') #pasta upload na raiz para organiza��o
-
-# Redireciona para a URL da p�gina principal ap�s login
 LOGIN_REDIRECT_URL = '/order/lista/'
 LOGOUT_REDIRECT_URL = '/home/'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-LOGGING = {
-
-    'version': 1,
-
-    'disable_existing_loggers': False,
-
-    'formatters': {
-
-        'simple': {
-
-            'format': 'Mensagem: %(levelname)s %(message)s'
-
-        },
-
-    },
-
-    'handlers': {
-
-        'console': {
-
-            'level': 'DEBUG',
-
-            'class': 'logging.StreamHandler',
-
-            'formatter': 'simple'
-
-        },
-
-    },
-
-    'loggers': {
-
-        'Zotake_PI2': {
-
-            'handlers': ['console'],
-
-            'level': 'DEBUG',
-
-            'propagate': True,
-
-        },
-
-        'main': {
-
-            'handlers': ['console'],
-
-            'level': 'DEBUG',
-
-            'propagate': True,
-
-        },
-
-    },
-
-}
