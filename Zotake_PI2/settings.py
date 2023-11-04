@@ -11,7 +11,7 @@ DEBUG = False
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]', 'zotakeartesanato.azurewebsites.net', 'www.zotakeartesanato.azurewebsites.net']
-CSRF_TRUSTED_ORIGINS = ['zotakeartesanato.azurewebsites.net']
+CSRF_TRUSTED_ORIGINS = ['https://zotakeartesanato.azurewebsites.net']
 if 'CODESPACE_NAME' in os.environ:
     CSRF_TRUSTED_ORIGINS = [f'https://{os.getenv("CODESPACE_NAME")}-8000.{os.getenv("GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN")}']
 
