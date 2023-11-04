@@ -1,7 +1,7 @@
 ﻿import os
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Configure the domain name using the environment variable
 # that Azure automatically creates for us.
