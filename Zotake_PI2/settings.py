@@ -58,17 +58,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Zotake_PI2.wsgi.application'
 
-# Configure Postgres database based on connection string of the libpq Keyword/Value form
-# https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING
-conn_str = os.getenv('AZURE_POSTGRESQL_CONNECTIONSTRING')
-conn_str_params = {pair.split('=')[0]: pair.split('=')[1] for pair in conn_str.split(' ')}
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': conn_str_params['dbname'],
-        'HOST': conn_str_params['host'],
-        'USER': conn_str_params['user'],
-        'PASSWORD': conn_str_params['password'],
+        'NAME': os.getenv('AZURE_POSTGRESQL_NAME'),
+        'HOST': os.getenv('AZURE_POSTGRESQL_HOST'),
+        'USER': os.getenv('AZURE_POSTGRESQL_USER'),
+        'PASSWORD': os.getenv('AZURE_POSTGRESQL_PASSWORD'),
     }
 }
 
