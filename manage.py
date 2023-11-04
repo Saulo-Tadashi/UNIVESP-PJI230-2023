@@ -2,7 +2,8 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-
+from django.config import settings
+from Zotake_PI2 import production
 from dotenv import load_dotenv
 
 def main():
@@ -18,7 +19,7 @@ def main():
     # if os.getenv('PRODUCTION') == 'False' :
     #    settings_module = 'Zotake_PI2.settings'
 
-    os.environ['DJANGO_SETTINGS_MODULE'] = 'Zotake_PI2.production'
+    settings.configure(DJANGO_SETTINGS_MODULE = production)
 
     
     try:
