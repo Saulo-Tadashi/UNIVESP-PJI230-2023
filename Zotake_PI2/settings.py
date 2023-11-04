@@ -10,8 +10,8 @@ DEBUG = False
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
-CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS').split(' ')
+ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]', 'zotakeartesanato.azurewebsites.net', 'www.zotakeartesanato.azurewebsites.net']
+CSRF_TRUSTED_ORIGINS = ['zotakeartesanato.azurewebsites.net']
 
 SECURE_SSL_REDIRECT = \
     os.getenv('SECURE_SSL_REDIRECT', '0').lower() in ['true', 't', '1']
