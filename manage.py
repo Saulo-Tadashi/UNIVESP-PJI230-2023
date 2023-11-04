@@ -15,7 +15,7 @@ def main():
     
     settings_module = "Zotake_PI2.production"
 
-    if PRODUCTION == False :
+    if os.getenv('PRODUCTION') == False :
         settings_module = "Zotake_PI2.settings"
 
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
