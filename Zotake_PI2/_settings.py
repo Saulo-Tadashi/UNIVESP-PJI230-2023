@@ -130,9 +130,9 @@ STATICFILES_DIRS = (
 )
 
 # Arquivos enviados pelos usu�rios
-MEDIA_URL = 'upload/'
+MEDIA_URL = 'media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'upload') #pasta upload na raiz para organiza��o
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #pasta upload na raiz para organiza��o
 
 # Redireciona para a URL da p�gina principal ap�s login
 LOGIN_REDIRECT_URL = '/order/lista/'
